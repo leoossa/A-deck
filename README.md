@@ -20,6 +20,7 @@ Currently in development:
 - Adding to Web Archive in order not to have problems with vanishing websites
 - better styling (including UI/UX and console log messages)
 - Context menu (currently it's just an icon) -  allow user to send page to different boards and stacks directly from context menu
+- Taking screenshots of website and including it as a attachment in card
 
 Ideas for further development:
 - rules for specific domains (query selectors), that user can save in options and use them to fill card data sent to server (ie. instead of sending url and title user may input rulese to create card with 'h1' as title and 'p' as a description)
