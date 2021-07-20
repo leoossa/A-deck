@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="material.css">
+    <link rel="stylesheet" href="materialize.min.css">
+</head>
+
+<body class="login-body popup-body">
+    <form class="popup-form">
+        <button id="sendPage" type="button" class="btn waves-effect waves-light blue right">Send Page</button>
+        <button id="options" class="btn waves-effect waves-light blue right">Go to options</button>
+        <button id="refresh" class="btn waves-effect waves-light blue right">Refresh boards</button>
+    </form>
+    <ul id="decksList">
+        <template id="boardItem-template">
+            <li>
+                <span class="title boardTitle">board: </span><br>
+                <ul id="stacksList"></br>
+                    <template id="stackItem-template">
+                        <li>
+                            <label for="selectStack">
+                                <input type="radio" name="selectStack" value="">
+                                <span class="title stackTitle"></span>
+                            </label>
+                        </li>
+                    </template>
+                </ul>
+            </li>
+        </template>
+    </ul>
+
+    </div>
+    <script src="getDecks.js"></script>
+    <script src="UI.js"></script>
+    <script src="popup.js"></script>
+</body>
+
+</html>

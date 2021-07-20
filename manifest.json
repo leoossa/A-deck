@@ -1,0 +1,40 @@
+{
+  "name": "A-Deck",
+  "description": "extension for A-(dding websites to Nextcloud) Deck",
+  "version": "1.0",
+  "manifest_version": 3,
+  "author": "Leonard Ossa",
+  "homepage_url": "https://github.com/leoossa/A-deck",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "https://*/"
+  ],
+  "action": {
+    "default_title": "Add this website to Deck!",
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "512": "icon.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      },
+      "description": "Opens popup"
+    }
+  }
+}
