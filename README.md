@@ -34,7 +34,7 @@ The popup loads *boards* from server, also loads all the *stacks* and saves them
 
 ## RATIONALE
 
-I saw [huntr.io board](https://huntr.co/demo/589189b5448fe5e45f01256c/board) to use for job searching and I thought that's a cool idea, but I want it to be on **my** server (that's **my** personal data) and I want to apply this kind of extension whereever **I** want, not only to recruitment process. You can use it anyhow you like. 
+I saw [huntr.io board](https://huntr.co/demo/589189b5448fe5e45f01256c/board) to use for job searching and I thought that's a cool idea, but I want it to be on **my** server (that's **my** personal data) and I want to apply this kind of workflow wherever **I** want, not only to recruitment process. You can use it anyhow you like. 
 ![huntr board screenshot - origin of idea](https://github.com/leoossa/A-deck/blob/master/screenshots/huntr.png)
 
 Also - the English 'A deck' sound very similar to Polish 'Edek' which is the name 'Edward'. So - hello Edward ;) 
