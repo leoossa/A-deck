@@ -23,9 +23,11 @@ function addEventListeners()
     fetch_and_save_boards();
     populateUI();
   });
+
   //add get decks button event listener
   document.getElementById('sendPage').addEventListener('click', function (event)
   {
+    const sendPageButton = document.getElementById('sendPage');
     chrome.storage.sync.get(["debug_mode", "defaultBoardId", "defaultStackId", "archive"], (items) =>
     {
       if (items.defaultStackId) // if there's no selected stack to send then there's no point of making call
@@ -37,7 +39,11 @@ function addEventListeners()
             archivePage(currentTab[0].url);
           }
           if (items.debug_mode) console.log("current tab is:", currentTab);
-          create_new_card(items.defaultBoardId, items.defaultStackId, currentTab[0].title, 1, currentTab[0].url);
+          create_new_card(items.defaultBoardId, items.defaultStackId, currentTab[0].title, 1, currentTab[0].url, ((data) =>
+          {
+            sendPageButton.classList.toggle('fadeOut');
+            setTimeout(function () { sendPageButton.remove(); }, 1000);
+          }));
         });
       }
     });
