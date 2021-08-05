@@ -157,42 +157,10 @@ li{
   opacity: 1;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+button{
+  transition: opacity 1s;
+  opacity: 1;
+}
+button.fadeOut{
+  opacity: 0;
+}
