@@ -48,9 +48,9 @@ function fetch_and_save_boards()
   call_nextcloud_api(NEXTCLOUD_REQUESTS.GET_BOARDS(true), saveBoards);
 }
 
-function create_new_card(boardId, stackId, title, order, description)
+function create_new_card(boardId, stackId, title, order, description, callback)
 {
-  call_nextcloud_api(NEXTCLOUD_REQUESTS.CREATE_CARD(boardId, stackId, title, order, description));
+  call_nextcloud_api(NEXTCLOUD_REQUESTS.CREATE_CARD(boardId, stackId, title, order, description), callback);
 }
 
 
