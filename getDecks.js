@@ -20,7 +20,7 @@
 const NEXTCLOUD_API_ENDPOINTS = {
   DECK_BASE_URL: "/index.php/apps/deck/api/v1.0/", // The API is located at https://nextcloud.local/index.php/apps/deck/api/v1.0
   BOARDS: "boards", // Fetch all user board GET /api/v1.0/boards
-  BOARDS_DETAILS: "?details", // Fetch all user board with details GET /api/v1.0/boards?details
+  BOARDS_DETAILS: "?details=true", // Fetch all user board with details GET /api/v1.0/boards?details
   STACKS: "stacks", // Get stacks - GET /boards/{boardId}/stacks
   CARDS: "cards", // POST /boards/{boardId}/stacks/{stackId}/cards - Create a new card
 };
