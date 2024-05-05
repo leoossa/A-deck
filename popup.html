@@ -9,26 +9,16 @@
 
 <body class="login-body">
     <div class="container">
-            <div class="row">
-                <div class="col s5">
-                    <a id="sendPage" class="w100 waves-effect waves-light btn blue"><i
-                            class="material-icons left">send</i>Send page</a>
-                </div>
-                <div class="col s7">
-                    <a id="originSettings" class="w100 waves-effect waves-light btn blue right"><i
-                            class="material-icons left">build</i>Settings for page</a>
-                </div>
+        <div class="row">
+            <div class="col s5">
+                <a id="sendPage" class="w100 waves-effect waves-light btn blue"><i
+                        class="material-icons left">send</i>Send page</a>
             </div>
-            <div class="row">
-                <div class="col s6">
-                    <a id="options" class="w100 waves-effect waves-light btn blue"><i
-                            class="material-icons left">settings</i>Options</a>
-                </div>
-                <div class="col s6">
-                    <a id="refresh" class="w100 waves-effect waves-light btn blue right"><i
-                            class="material-icons left">refresh</i>Refresh boards</a>
-                </div>
+            <div class="col s7">
+                <a id="originSettings" class="w100 waves-effect waves-light btn blue right"><i
+                        class="material-icons left">build</i>Settings for page</a>
             </div>
+        </div>
         <ul id="decksList">
             <template id="boardItem-template">
                 <li>
@@ -46,6 +36,16 @@
                 </li>
             </template>
         </ul>
+        <div class="row">
+            <div class="col s6">
+                <a id="options" class="w100 waves-effect waves-light btn blue"><i
+                        class="material-icons left">settings</i>Options</a>
+            </div>
+            <div class="col s6">
+                <a id="refresh" class="w100 waves-effect waves-light btn blue right"><i
+                        class="material-icons left">refresh</i>Refresh boards</a>
+            </div>
+        </div>
     </div>
     <script src="getDecks.js"></script>
     <script src="UI.js"></script>
