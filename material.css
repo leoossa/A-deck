@@ -201,3 +201,6 @@ button.fadeOut {
 .w100 {
   width: 100%;
 }
+.mh25em{
+  min-height: 25em;
+}
