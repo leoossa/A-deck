@@ -10,12 +10,29 @@
 <body class="login-body">
     <div class="container">
         <form class="popup-form">
-            <button id="sendPage" type="button" class="btn blue">Send Page</button>
-            <button id="originSettings" type="button" class="btn blue">Settings for this website</button>
+            <div class="row">
+                <div class="col">
+                    <a id="sendPage" class="waves-effect waves-light btn blue"><i
+                            class="material-icons left">send</i>Send page</a>
+                </div>
+                <div class="col">
+                    <a id="originSettings" class="waves-effect waves-light btn blue"><i
+                            class="material-icons left">settings</i>Settings for this page</a>
+                </div>
+            </div>
         </form>
         <form class="popup-form">
-            <button id="options" class="btn blue">Go to options</button>
-            <button id="refresh" class="btn blue">Refresh boards</button>
+            <div class="row">
+                <div class="col">
+                    <a id="options" class="waves-effect waves-light btn blue"><i
+                            class="material-icons left">settings</i>Go
+                        to options</a>
+                </div>
+                <div class="col">
+                    <a id="refresh" class="waves-effect waves-light btn blue"><i
+                            class="material-icons left">refresh</i>Refresh boards</a>
+                </div>
+            </div>
         </form>
         <ul id="decksList">
             <template id="boardItem-template">
