@@ -10,13 +10,33 @@
 <body class="login-body">
     <div class="container">
         <div class="row">
-            <div class="col s5">
+            <div class="col s12">
                 <a id="sendPage" class="w100 waves-effect waves-light btn blue"><i
                         class="material-icons left">send</i>Send page</a>
             </div>
-            <div class="col s7">
-                <a id="originSettings" class="w100 waves-effect waves-light btn blue right"><i
-                        class="material-icons left">build</i>Settings for page</a>
+        </div>
+        <div class="row">"
+            <div class="col s12">
+                <ul class="collapsible">
+                    <li>
+                        <div id="originSettings" class="collapsible-header blue btn-large waves-effect waves-light valign-wrapper"><i
+                                class="material-icons">build</i>Settings for page</div>
+                        <div class="collapsible-body blue accent-1 mh20em">
+                            <div class="input-field col s12">
+                                <input placeholder="XPath returning text" id="cardTitle" type="text" class="validate">
+                                <label for="cardTitle">Card title</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <input placeholder="XPath returning text" id="cardDescription" type="text">
+                                <label for="cardDescription">Card description</label>
+                            </div>
+                            <div class="col s12">
+                                <a id="saveSelectorsSettings" class="w100 waves-effect waves-light btn blue"><i
+                                        class="material-icons left">save</i>Save & Preview</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         <ul id="decksList">
@@ -52,6 +72,7 @@
     <script src="getDecks.js"></script>
     <script src="UI.js"></script>
     <script src="popup.js"></script>
+    <script type="text/javascript" src="materialize.min.js"></script>
 </body>
 
 </html>
