@@ -198,3 +198,7 @@ button {
 button.fadeOut {
   opacity: 0;
 }
+
+.w100 {
+  width: 100%;
+}
