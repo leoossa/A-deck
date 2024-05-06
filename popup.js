@@ -19,21 +19,32 @@ function addEventListeners() {
   });
 
   //add get decks button event listener
-  document.getElementById('sendPage').addEventListener('click', function (event) {
+  document.getElementById('sendPage').addEventListener('click', async function (event) {
     const sendPageButton = document.getElementById('sendPage');
-    chrome.storage.sync.get(["debug_mode", "defaultBoardId", "defaultStackId", "archive"], (items) => {
+    let [currentTab] = await getCurrentTab();
+    let tabOrigins = new URL(currentTab.url).origin;
+    chrome.storage.sync.get(["debug_mode", "defaultBoardId", "defaultStackId", "archive", tabOrigins], async (items) => {
       if (items.defaultStackId) // if there's no selected stack to send then there's no point of making call
       {
-        chrome.tabs.query({ active: true, currentWindow: true }, currentTab => {
-          if (items.archive) {
-            archivePage(currentTab[0].url);
+        if (items.archive) {
+          archivePage(currentTab.url);
+        }
+        if (items.debug_mode) console.log("current tab is:", currentTab);
+        let cardTitle = currentTab.title; // these are defaults
+        let cardDescription = currentTab.url; // these are defaults
+        if (tabOrigins in items) {
+          if (items[tabOrigins].cardTitle) {
+            cardTitle = await evaluateSelectorOnTab(items[tabOrigins].cardTitle, currentTab);
           }
-          if (items.debug_mode) console.log("current tab is:", currentTab);
-          create_new_card(items.defaultBoardId, items.defaultStackId, currentTab[0].title, 1, currentTab[0].url, ((data) => {
-            sendPageButton.classList.toggle('fadeOut');
-            setTimeout(function () { sendPageButton.remove(); }, 1000);
-          }));
-        });
+          if (items[tabOrigins].cardDescription) {
+            cardDescription = await evaluateSelectorOnTab(items[tabOrigins].cardDescription, currentTab);
+          }
+        }
+        console.log("cardTitle:", cardTitle, "\n cardDescription:", cardDescription);
+        create_new_card(items.defaultBoardId, items.defaultStackId, cardTitle, 1, cardDescription, ((data) => {
+          sendPageButton.classList.toggle('fadeOut');
+          setTimeout(function () { sendPageButton.remove(); }, 1000);
+        }));
       }
     });
   });
