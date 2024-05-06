@@ -37,10 +37,39 @@ function addEventListeners() {
       }
     });
   });
+  document.getElementById('saveSelectorsSettings').addEventListener('click', function () {
+    executeSelectorOnCurrentTabAndInjectResult('cardTitle');
+    executeSelectorOnCurrentTabAndInjectResult('cardDescription');
+  });
 }
 
-function archivePage(url)
-{
+function executeSelectorOnCurrentTabAndInjectResult(elementId) {
+  let element = document.getElementById(elementId);
+  chrome.tabs.query({ active: true, currentWindow: true }, ([currentTab]) => {
+    if (currentTab) {
+      try {
+        chrome.scripting.executeScript({
+          target: { tabId: currentTab.id },
+          func: evaluateSelector,
+          args: [element.value]
+        }).then(injectionResults => {
+          if (injectionResults[0].result) {
+            console.log(element.labels[0].textContent + " : " + injectionResults[0].result);
+            element.value = injectionResults[0].result;
+          }
+        })
+      } catch (e) {
+        console.error('Provided XPath expression is not valid', e)
+      }
+    }
+  });
+}
+
+function archivePage(url) {
   console.log("not implemented yet");
   alert("not implemented yet");
+}
+
+function evaluateSelector(selector) {
+  return document.evaluate(selector, document, null, XPathResult.STRING_TYPE, null).stringValue;
 }
