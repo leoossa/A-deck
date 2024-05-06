@@ -38,13 +38,13 @@ function addEventListeners() {
     });
   });
   document.getElementById('saveSelectorsSettings').addEventListener('click', function () {
-    executeSelectorOnCurrentTabAndInjectResult('cardTitle');
-    executeSelectorOnCurrentTabAndInjectResult('cardDescription');
+    executeSelectorOnCurrentTabAndInjectResult('cardTitle', 'cardTitlePreview');
+    executeSelectorOnCurrentTabAndInjectResult('cardDescription', 'cardDescriptionPreview');
   });
 }
 
-function executeSelectorOnCurrentTabAndInjectResult(elementId) {
-  let element = document.getElementById(elementId);
+function executeSelectorOnCurrentTabAndInjectResult(selectorElementId, previewElementId) {
+  let element = document.getElementById(selectorElementId);
   chrome.tabs.query({ active: true, currentWindow: true }, ([currentTab]) => {
     if (currentTab) {
       try {
@@ -55,7 +55,10 @@ function executeSelectorOnCurrentTabAndInjectResult(elementId) {
         }).then(injectionResults => {
           if (injectionResults[0].result) {
             console.log(element.labels[0].textContent + " : " + injectionResults[0].result);
-            element.value = injectionResults[0].result;
+            document.getElementById(previewElementId).value = injectionResults[0].result;
+          }
+          else {
+            document.getElementById(previewElementId).value = "";
           }
         })
       } catch (e) {
