@@ -1,5 +1,6 @@
 function populateUI()
 {
+    M.AutoInit();
     cleanPreviouslyDisplayedBoards();
     chrome.storage.sync.get(["nextcloud_boards", "debug_mode", "defaultBoardId", "defaultStackId"], (items) =>
     {
