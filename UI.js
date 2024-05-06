@@ -1,6 +1,7 @@
 function populateUI()
 {
     M.AutoInit();
+    getOriginSettings();
     cleanPreviouslyDisplayedBoards();
     chrome.storage.sync.get(["nextcloud_boards", "debug_mode", "defaultBoardId", "defaultStackId"], (items) =>
     {
@@ -46,6 +47,37 @@ function populateUI()
                 });
             }
         }
+    });
+}
+
+function getOriginSettings() {
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    chrome.tabs.query(queryOptions, ([tab]) => {
+        // `tab` will either be a `tabs.Tab` instance or `undefined`.
+        if (chrome.runtime.lastError)
+            console.error(chrome.runtime.lastError);
+        chrome.storage.sync.get(["debug_mode"], (items) => {
+            if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using chrome.storage
+            if (tab) {
+                if (items.debug_mode) {
+                    console.log("Current tab: %O", tab);
+                }
+                let tabOrigins = new URL(tab.url).origin;
+                if (items.debug_mode) { console.log("Current tab origin: %s", tabOrigins); }
+                chrome.storage.sync.get(tabOrigins, (items) => {
+                    if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using chrome.storage
+                    if (items[tabOrigins]) {
+                        console.log("Settings for this tab origin: %s", tabOrigins);
+                    }
+                    else {
+                        console.log("No settings for this tab origin: %s", tabOrigins);
+                        const tabOriginSettingsButton = document.getElementById('originSettings');
+                        tabOriginSettingsButton.lastChild.textContent = `Add settings for ${tabOrigins}`;
+                    }
+                });
+            }
+
+        });
     });
 }
 
