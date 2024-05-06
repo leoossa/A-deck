@@ -56,6 +56,23 @@ function executeSelectorOnCurrentTabAndInjectResult(selectorElementId, previewEl
           if (injectionResults[0].result) {
             console.log(element.labels[0].textContent + " : " + injectionResults[0].result);
             document.getElementById(previewElementId).value = injectionResults[0].result;
+            let tabOrigins = new URL(currentTab.url).origin;
+            let settings = { [tabOrigins]: { [element.id]: element.value } };
+            chrome.storage.sync.get([tabOrigins], (items) => {
+              if (items[tabOrigins].cardDescription) {
+                console.log("cardDescription set to:", items[tabOrigins].cardDescription);
+                settings[tabOrigins].cardDescription = items[tabOrigins].cardDescription;
+              }
+              if (items[tabOrigins].cardTitle) {
+                console.log("cardTitle set to:", items[tabOrigins].cardTitle);
+                settings[tabOrigins].cardTitle = items[tabOrigins].cardTitle;
+              }
+              console.log("settings set to:", settings);
+              chrome.storage.sync.set(settings, () => {
+                if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using browser local storage
+                console.log("tabOrigins set to:", tabOrigins);
+              });
+            })
           }
           else {
             document.getElementById(previewElementId).value = "";
