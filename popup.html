@@ -19,16 +19,30 @@
             <div class="col s12">
                 <ul class="collapsible">
                     <li>
-                        <div id="originSettings" class="collapsible-header blue btn-large waves-effect waves-light valign-wrapper"><i
+                        <div id="originSettings"
+                            class="collapsible-header blue btn-large waves-effect waves-light valign-wrapper"><i
                                 class="material-icons">build</i>Settings for page</div>
                         <div class="collapsible-body blue accent-1 mh25em">
-                            <div class="input-field col s12">
-                                <input placeholder="XPath returning text" id="cardTitle" type="text" class="validate">
-                                <label for="cardTitle">Card title</label>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="XPath returning text" id="cardTitle" type="text"
+                                        class="validate">
+                                    <label for="cardTitle">Card title</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Preview" id="cardTitle" type="text" disabled>
+                                    <label for="cardTitle">default (tab title)</label>
+                                </div>
                             </div>
-                            <div class="input-field col s12">
-                                <input placeholder="XPath returning text" id="cardDescription" type="text">
-                                <label for="cardDescription">Card description</label>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input placeholder="XPath returning text" id="cardDescription" type="text">
+                                    <label for="cardDescription">Card description</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input placeholder="Preview" id="cardTitle" type="text" disabled>
+                                    <label for="cardTitle">default (tab url)</label>
+                                </div>
                             </div>
                             <div class="col s12">
                                 <a id="saveSelectorsSettings" class="w100 waves-effect waves-light btn blue"><i
