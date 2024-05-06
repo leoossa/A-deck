@@ -23,7 +23,9 @@ function populateUI()
                     const currentBoardItem = boardTemplate.content.cloneNode(true);
                     currentBoardItem.querySelector('.title').innerText = `board: ${board.title}`;
                     const liBoardItem = currentBoardItem.querySelector('li');
-                    liBoardItem.style.backgroundColor = `#${board.color}`;
+                    liBoardItem.style.backgroundColor = `#${board.color}`; // Deck API retruns board color in "0087C5" format
+                    const textColor = (parseInt(board.color, 16) > 0xffffff / 2) ? '#000' : '#fff'; // this is simplified formula taken from https://stackoverflow.com/a/33890907
+                    liBoardItem.style.color = textColor
                     board.stacks.forEach(stack =>
                     {
                         const stacksList = currentBoardItem.getElementById('stacksList');
@@ -32,6 +34,8 @@ function populateUI()
                             console.log("Stack to display:", stack);
                         }
                         const currentStackItem = stackTemplate.content.cloneNode(true);
+                        const liLabel = currentStackItem.querySelector('label');
+                        liLabel.style.color = textColor;
                         currentStackItem.querySelector('.title').innerText = `${stack.title}`;
                         currentStackItem.querySelector('input[type=radio]').value = `${board.id}.${stack.id}`;
                         if (board.id == items.defaultBoardId && stack.id == items.defaultStackId)
