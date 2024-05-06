@@ -37,35 +37,60 @@ function addEventListeners() {
       }
     });
   });
-  document.getElementById('saveSelectorsSettings').addEventListener('click', function () {
-    executeSelectorOnCurrentTabAndInjectResult('cardTitle', 'cardTitlePreview');
-    executeSelectorOnCurrentTabAndInjectResult('cardDescription', 'cardDescriptionPreview');
+  document.getElementById('saveSelectorsSettings').addEventListener('click', async function () {
+    let [currentTab] = await getCurrentTab();
+    let cardTitleSelector = document.getElementById('cardTitle').value;
+    let cardTitleSelectorResult = await evaluateSelectorOnTab(cardTitleSelector, currentTab);
+    let cardDescriptionSelector = document.getElementById('cardDescription').value;
+    let cardDescriptionSelectorResult = await evaluateSelectorOnTab(cardDescriptionSelector, currentTab);
+    setPreviews(cardTitleSelectorResult, cardDescriptionSelectorResult);
+    let settings = makeSettings(currentTab, cardTitleSelector, cardDescriptionSelector);
+    chrome.storage.sync.set(settings, () => {
+      if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using browser local storage
+      console.log("settings set to:", settings);
+    });
   });
 }
 
-function executeSelectorOnCurrentTabAndInjectResult(selectorElementId, previewElementId) {
-  let element = document.getElementById(selectorElementId);
-  chrome.tabs.query({ active: true, currentWindow: true }, ([currentTab]) => {
-    if (currentTab) {
-      try {
-        chrome.scripting.executeScript({
-          target: { tabId: currentTab.id },
-          func: evaluateSelector,
-          args: [element.value]
-        }).then(injectionResults => {
-          if (injectionResults[0].result) {
-            console.log(element.labels[0].textContent + " : " + injectionResults[0].result);
-            document.getElementById(previewElementId).value = injectionResults[0].result;
-          }
-          else {
-            document.getElementById(previewElementId).value = "";
-          }
-        })
-      } catch (e) {
-        console.error('Provided XPath expression is not valid', e)
-      }
-    }
-  });
+function makeSettings(currentTab, cardTitleSelector, cardDescriptionSelector) {
+  let tabOrigins = new URL(currentTab.url).origin;
+  let settings = { [tabOrigins]: {} };
+  if (cardTitleSelector) {
+    settings[tabOrigins]["cardTitle"] = cardTitleSelector;
+  }
+  if (cardDescriptionSelector) {
+    settings[tabOrigins]["cardDescription"] = cardDescriptionSelector;
+  }
+  return settings;
+}
+
+function setPreviews(cardTitle, cardDescription) {
+  document.getElementById('cardTitlePreview').value = cardTitle;
+  document.getElementById('cardDescriptionPreview').value = cardDescription;
+}
+
+async function evaluateSelectorOnTab(selector, tab) {
+  let injectionResults = null;
+  try {
+    injectionResults = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: evaluateSelector,
+      args: [selector]
+    })
+  }
+  catch (e) {
+    console.error('Provided XPath expression is not valid', e)
+  }
+  if (injectionResults && injectionResults[0].result) {
+    return injectionResults[0].result;
+  }
+  else {
+    return null;
+  }
+}
+
+async function getCurrentTab() {
+  return await chrome.tabs.query({ active: true, currentWindow: true });
 }
 
 function archivePage(url) {
