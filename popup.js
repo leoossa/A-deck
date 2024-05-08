@@ -45,8 +45,9 @@ function addEventListeners() {
         if (!cardDescription) cardDescription = currentTab.url; // in case of Xpath evaluating to null set the defaults  
         console.log("cardTitle:", cardTitle, "\n cardDescription:", cardDescription);
         create_new_card(items.defaultBoardId, items.defaultStackId, cardTitle, 1, cardDescription, ((data) => {
-          sendPageButton.classList.toggle('fadeOut');
-          setTimeout(function () { sendPageButton.remove(); }, 1000);
+          console.log(data);
+          sendPageButton.classList.toggle('scale-out');
+          setTimeout(function () { sendPageButton.parentElement.parentElement.remove(); }, 1000);
         }));
       }
     });
