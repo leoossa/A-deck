@@ -38,8 +38,11 @@ function addEventListeners() {
           }
           if (items[tabOrigins].cardDescription) {
             cardDescription = await evaluateSelectorOnTab(items[tabOrigins].cardDescription, currentTab);
+            cardDescription += "\n\n" + currentTab.url;
           }
         }
+        if (!cardTitle) cardTitle = currentTab.title; // in case of Xpath evaluating to null set the defaults
+        if (!cardDescription) cardDescription = currentTab.url; // in case of Xpath evaluating to null set the defaults  
         console.log("cardTitle:", cardTitle, "\n cardDescription:", cardDescription);
         create_new_card(items.defaultBoardId, items.defaultStackId, cardTitle, 1, cardDescription, ((data) => {
           sendPageButton.classList.toggle('fadeOut');
