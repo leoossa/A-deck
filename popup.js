@@ -31,14 +31,14 @@ function addEventListeners() {
         }
         if (items.debug_mode) console.log("current tab is:", currentTab);
         let cardTitle = currentTab.title; // these are defaults
-        let cardDescription = currentTab.url; // these are defaults
+        let cardDescription = "[" + currentTab.url + "](" + currentTab.url + ")"; // these are defaults
         if (tabOrigins in items) {
           if (items[tabOrigins].cardTitle) {
             cardTitle = await evaluateSelectorOnTab(items[tabOrigins].cardTitle, currentTab);
           }
           if (items[tabOrigins].cardDescription) {
             cardDescription = await evaluateSelectorOnTab(items[tabOrigins].cardDescription, currentTab);
-            cardDescription += "\n\n" + currentTab.url;
+            cardDescription += "\n\n[" + currentTab.url + "](" + currentTab.url + ")";
           }
         }
         if (!cardTitle) cardTitle = currentTab.title; // in case of Xpath evaluating to null set the defaults
@@ -113,5 +113,19 @@ function archivePage(url) {
 }
 
 function evaluateSelector(selector) {
-  return document.evaluate(selector, document, null, XPathResult.STRING_TYPE, null).stringValue;
+  let iterator = document.evaluate(selector, document, null, XPathResult.ANY_TYPE, null);
+  let result = '';
+  try {
+    let thisNode = iterator.iterateNext();
+
+    while (thisNode) {
+      console.log(thisNode.textContent);
+      result += thisNode.textContent + " ";
+      thisNode = iterator.iterateNext();
+    }
+  } catch (e) {
+    console.error(`Error: Document tree modified during iteration ${e}`);
+  }
+  console.log("result:", result);
+  return result;
 }
