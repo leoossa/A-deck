@@ -1,7 +1,6 @@
-function populateUI()
-{
+async function populateUI() {
     M.AutoInit();
-    getOriginSettings();
+    await getOriginSettings();
     cleanPreviouslyDisplayedBoards();
     chrome.storage.sync.get(["nextcloud_boards", "debug_mode", "defaultBoardId", "defaultStackId"], (items) => {
         if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using chrome.storage
@@ -42,35 +41,30 @@ function populateUI()
     });
 }
 
-function getOriginSettings() {
-    let queryOptions = { active: true, lastFocusedWindow: true };
-    chrome.tabs.query(queryOptions, ([tab]) => {
-        // `tab` will either be a `tabs.Tab` instance or `undefined`.
-        if (chrome.runtime.lastError)
-            console.error(chrome.runtime.lastError);
-        chrome.storage.sync.get(["debug_mode"], (items) => {
-            if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using chrome.storage
-            if (tab) {
-                if (items.debug_mode) {
-                    console.log("Current tab: %O", tab);
-                }
-                let tabOrigins = new URL(tab.url).origin;
-                if (items.debug_mode) { console.log("Current tab origin: %s", tabOrigins); }
-                chrome.storage.sync.get(tabOrigins, (items) => {
-                    if (chrome.runtime.lastError) { console.error(chrome.runtime.lastError.message); } // error using chrome.storage
-                    if (items[tabOrigins]) {
-                        console.log("Settings for this tab origin: %s", tabOrigins);
-                    }
-                    else {
-                        console.log("No settings for this tab origin: %s", tabOrigins);
-                        const tabOriginSettingsButton = document.getElementById('originSettings');
-                        tabOriginSettingsButton.lastChild.textContent = `Add settings for ${tabOrigins}`;
-                    }
-                });
-            }
-
-        });
-    });
+async function getOriginSettings() {
+    let [currentTab] = await getCurrentTab();
+    let tabOrigins = new URL(currentTab.url).origin;
+    let originSettings = await chrome.storage.sync.get(tabOrigins);
+    if (originSettings[tabOrigins]) {
+        console.log("Settings for this tab origin: %s", tabOrigins);
+        console.log(originSettings);
+        const tabOriginSettingsButton = document.getElementById('originSettings');
+        tabOriginSettingsButton.lastChild.textContent = `Change settings for ${tabOrigins}`;
+        let collapsible = document.querySelector('.collapsible');
+        M.Collapsible.getInstance(collapsible).open();
+        let cardTitle = originSettings[tabOrigins].cardTitle ? originSettings[tabOrigins].cardTitle : null;
+        document.getElementById('cardTitle').value = cardTitle;
+        let cardDescription = originSettings[tabOrigins].cardDescription ? originSettings[tabOrigins].cardDescription : null;
+        document.getElementById('cardDescription').value = cardDescription;
+        let cardTitleSelectorResult = await evaluateSelectorOnTab(cardTitle, currentTab);
+        let cardDescriptionSelectorResult = await evaluateSelectorOnTab(cardDescription, currentTab);
+        setPreviews(cardTitleSelectorResult, cardDescriptionSelectorResult);
+    }
+    else {
+        console.log("No settings for this tab origin: %s", tabOrigins);
+        const tabOriginSettingsButton = document.getElementById('originSettings');
+        tabOriginSettingsButton.lastChild.textContent = `Add settings for ${tabOrigins}`;
+    }
 }
 
 function cleanPreviouslyDisplayedBoards() {

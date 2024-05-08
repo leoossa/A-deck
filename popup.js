@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   addEventListeners();
-  populateUI();
+  await populateUI();
 });
 
 function addEventListeners() {
@@ -13,9 +13,9 @@ function addEventListeners() {
     }
   });
 
-  document.querySelector('#refresh').addEventListener('click', function () {
+  document.querySelector('#refresh').addEventListener('click', async function () {
     fetch_and_save_boards();
-    populateUI();
+    await populateUI();
   });
 
   //add get decks button event listener
