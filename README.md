@@ -6,6 +6,8 @@
 
 Basically - it sends any webpage (current tab) to your **Deck** on your **Nextcloud** instance by creating a *card*. 
 
+You can set up specific `Xpath` selectors for given domain names.
+
 Here's the option page:
 
 ![options screenshot](https://raw.githubusercontent.com/leoossa/A-deck/master/screenshots/options.png)
@@ -28,7 +30,7 @@ The popup loads *boards* from server, also loads all the *stacks* and saves them
 - apply naming conventions and guidelines, fix errors
 
 ### Ideas for further development:
-- rules for specific domains (query selectors), that user can save in options and use them to fill card data sent to server (ie. instead of sending url and title user may input rulese to create card with 'h1' as title and 'p' as a description)
+~~- rules for specific domains (query selectors), that user can save in options and use them to fill card data sent to server (ie. instead of sending url and title user may input rulese to create card with 'h1' as title and 'p' as a description)~~
 - domain based rules / global rules
 - GUI query selector tool (easy for non-technical user) - similar to 
 
