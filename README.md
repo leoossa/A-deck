@@ -8,11 +8,11 @@ Basically - it sends any webpage (current tab) to your **Deck** on your **Nextcl
 
 By default it uses tab title as a card title and tab URL as a description but…
 
-You can set up specific `Xpath` selectors for given domains:
+You can set up specific `Xpath` selectors for given domains for card title & description:
 
 ![Xpath selectors screenshot](screenshots/xpath.png)
 
-(It adds link to the description at the end)
+(If you use custom selector for description it still adds tab URL to the card description at the end)
 
 Here's the option page:
 
