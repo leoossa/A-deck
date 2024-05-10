@@ -6,9 +6,13 @@
 
 Basically - it sends any webpage (current tab) to your **Deck** on your **Nextcloud** instance by creating a *card*. 
 
-You can set up specific `Xpath` selectors for given domains.
+By default it uses tab title as a card title and tab URL as a description but…
+
+You can set up specific `Xpath` selectors for given domains:
 
 ![Xpath selectors screenshot](screenshots/xpath.png)
+
+(It adds link to the description at the end)
 
 Here's the option page:
 
