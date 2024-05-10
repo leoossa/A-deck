@@ -6,17 +6,23 @@
 
 Basically - it sends any webpage (current tab) to your **Deck** on your **Nextcloud** instance by creating a *card*. 
 
+By default it uses tab title as a card title and tab URL as a description but…
+
+You can set up specific `Xpath` selectors for given domains for card title & description:
+
+![Xpath selectors screenshot](screenshots/xpath.png)
+
+(If you use custom selector for description it still adds tab URL to the card description at the end)
+
 Here's the option page:
 
 ![options screenshot](https://raw.githubusercontent.com/leoossa/A-deck/master/screenshots/options.png)
 
 Here's the popup with boards fetched from Nextcloud server (you can select which board and stack is default for sending pages)
 
-![popup screenshot](https://raw.githubusercontent.com/leoossa/A-deck/master/screenshots/popup.png)
+![popup board screenshot](screenshots/boards.png)
 
 The popup loads *boards* from server, also loads all the *stacks* and saves them into local browser storage. It uses *boards' color* as background color. 
-
-![another screenshot](https://raw.githubusercontent.com/leoossa/A-deck/master/screenshots/screenshot.png)
 
 ### Currently in development:
 - Adding to **Web Archive** in order not to have problems with vanishing websites
@@ -28,7 +34,7 @@ The popup loads *boards* from server, also loads all the *stacks* and saves them
 - apply naming conventions and guidelines, fix errors
 
 ### Ideas for further development:
-- rules for specific domains (query selectors), that user can save in options and use them to fill card data sent to server (ie. instead of sending url and title user may input rulese to create card with 'h1' as title and 'p' as a description)
+~~- rules for specific domains (query selectors), that user can save in options and use them to fill card data sent to server (ie. instead of sending url and title user may input rulese to create card with 'h1' as title and 'p' as a description)~~
 - domain based rules / global rules
 - GUI query selector tool (easy for non-technical user) - similar to 
 
