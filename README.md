@@ -6,7 +6,9 @@
 
 Basically - it sends any webpage (current tab) to your **Deck** on your **Nextcloud** instance by creating a *card*. 
 
-You can set up specific `Xpath` selectors for given domain names.
+You can set up specific `Xpath` selectors for given domains.
+
+![Xpath selectors screenshot](screenshots/xpath.png)
 
 Here's the option page:
 
@@ -14,11 +16,9 @@ Here's the option page:
 
 Here's the popup with boards fetched from Nextcloud server (you can select which board and stack is default for sending pages)
 
-![popup screenshot](https://raw.githubusercontent.com/leoossa/A-deck/master/screenshots/popup.png)
+![popup board screenshot](screenshots/boards.png)
 
 The popup loads *boards* from server, also loads all the *stacks* and saves them into local browser storage. It uses *boards' color* as background color. 
-
-![another screenshot](https://raw.githubusercontent.com/leoossa/A-deck/master/screenshots/screenshot.png)
 
 ### Currently in development:
 - Adding to **Web Archive** in order not to have problems with vanishing websites
