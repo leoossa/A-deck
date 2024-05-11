@@ -1,3 +1,12 @@
+## [2.0]
+### Added
+- You can use Xpath selectors to set Card title & description
+- Previews for given Xpath selectors
+- Xpath selectors are saved domain-based in local storage 
+- URLs in description are clickable links now
+### Fixed
+- Board background color is now used to generate font color with enough contrast based on simple formula
+
 ## [1.1] 
 ### Added
 - Button now is vanishing after sending page to the Deck
