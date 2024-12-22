@@ -1,3 +1,7 @@
+## [2.1]
+### Added
+- You can use Login Flow to authenticate which should resolve issues with 2FA (Issue #4)
+
 ## [2.0]
 ### Added
 - You can use Xpath selectors to set Card title & description
