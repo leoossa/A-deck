@@ -18,20 +18,22 @@
             required autofocus><br>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field">
-          <label for="username">Username:</label><br>
-          <input type="text" id="username" class="validate" name="username" placeholder="username" required><br>
+      <div class="row valign-wrapper">
+        <div class="col s6">
+          <div class="input-field">
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" class="validate" name="username" placeholder="username" required><br>
+          </div>
+          <div class="input-field">
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" class="validate" name="password" placeholder="password" required><br>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="input-field">
-          <label for="password">Password:</label><br>
-          <input type="password" id="password" class="validate" name="password" placeholder="password" required><br>
+        <div class="col s6 ">
+        <a class="waves-effect waves-light btn" id="launchWebAuthFlow">Authorize by Login Flow</a>
         </div>
       </div>
     </fieldset>
-    <button id="launchWebAuthFlow">Authorize with OAuth</button>
     <fieldset>
       <legend>Saving options</legend>
       <div class="switch col s6 development">
