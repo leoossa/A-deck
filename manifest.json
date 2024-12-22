@@ -1,7 +1,7 @@
 {
   "name": "A-Deck",
   "description": "extension for A-(dding websites to Nextcloud) Deck",
-  "version": "2",
+  "version": "2.1",
   "manifest_version": 3,
   "author": "Leonard Ossa",
   "homepage_url": "https://github.com/leoossa/A-deck",
